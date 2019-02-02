@@ -5,14 +5,14 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
-import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.runtime.server.EmbeddedServer;
 import micronaut.demo.modules.user.model.User;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertNotNull;
+import java.util.Date;
+
 import static junit.framework.TestCase.assertEquals;
 
 public class UserControllerTest {
@@ -45,4 +45,20 @@ public class UserControllerTest {
         assertEquals(HttpStatus.OK, response.getStatus());
     }
 
+    @Test
+    public void Register_User_True() throws Exception {
+        User user = getUser();
+        HttpRequest request = HttpRequest.POST("/users", user);
+        HttpResponse response = client.toBlocking().exchange(request, User.class);
+        assertEquals(HttpStatus.CREATED, response.getStatus());
+    }
+
+    public User getUser() {
+        User user = new User();
+        user.setName("Test");
+        user.setBirthdate(new Date(1986, 11, 20));
+        user.setEmail("teste@teste.com");
+        user.setPassword("micronaut");
+        return user;
+    }
 }
