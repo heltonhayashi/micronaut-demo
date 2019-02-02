@@ -34,10 +34,24 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     @Transactional
+    public void deleteById(@NotNull Long id) {
+        findById(id).ifPresent(user -> entityManager.remove(user));
+    }
+
+    @Override
+    @Transactional
     public List <User> findAll() {
         String qlString = "SELECT u FROM User as u";
         TypedQuery <User> query = entityManager.createQuery(qlString, User.class);
         return query.getResultList();
     }
 
+    @Override
+    @Transactional
+    public int update(User user) {
+        return entityManager.createQuery("UPDATE User e SET name = :name where id = :id")
+                .setParameter("name", user.getName())
+                .setParameter("id", user.getId())
+                .executeUpdate();
+    }
 }

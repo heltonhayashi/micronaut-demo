@@ -1,10 +1,8 @@
 package micronaut.demo.modules.user.controller;
 
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
+import micronaut.demo.comum.exception.NotFoundException;
 import micronaut.demo.modules.user.model.User;
 import micronaut.demo.modules.user.service.UserService;
 
@@ -23,6 +21,16 @@ public class UserController {
     @Get
     List <User> all() {
         return userService.findAll();
+    }
+
+    @Get("/{id}")
+    User get(Long id) {
+        return userService.getUser(id);
+    }
+
+    @Put("/{id}")
+    User update(Long id, @Body @Valid User user) {
+        return userService.update(id, user);
     }
 
     @Post

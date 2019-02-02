@@ -14,5 +14,9 @@ public interface UserRepository {
 
     User save(@NotBlank User user);
 
+    void deleteById(@NotNull Long id);
+
     List <User> findAll();
+
+    int update(User user);
 }
