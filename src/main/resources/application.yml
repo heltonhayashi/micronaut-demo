@@ -1,6 +1,10 @@
 micronaut:
     application:
         name: micronaut-demo
+    server:
+      cors:
+        enabled: true
+
 ---
 datasources:
   default:

@@ -12,15 +12,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Date;
-
-import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertEquals;
 
 public class UserControllerTest {
 
     private static EmbeddedServer server;
     private static HttpClient client;
+
 
     @BeforeClass
     public static void setupServer() {
@@ -51,7 +49,6 @@ public class UserControllerTest {
     public void Get_IdEqualsOne_Empty() throws Exception {
         HttpRequest request = HttpRequest.GET("/users/1");
         String body = client.toBlocking().retrieve(request);
-        assertNotNull(body);
         assertEquals(
                 body,
                 "{}"
@@ -81,9 +78,10 @@ public class UserControllerTest {
     public User getUser() {
         User user = new User();
         user.setName("Test");
-        user.setBirthdate(new Date(1986, 11, 20));
+        user.setBirthdate("20/11/1986");
         user.setEmail("teste@teste.com");
         user.setPassword("micronaut");
         return user;
     }
+
 }

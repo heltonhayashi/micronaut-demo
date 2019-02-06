@@ -49,9 +49,13 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     @Transactional
     public int update(User user) {
-        return entityManager.createQuery("UPDATE User e SET name = :name where id = :id")
-                .setParameter("name", user.getName())
+        return entityManager.createQuery("UPDATE User e SET name = :name, email = :email, password = :password, birthdate = :birthdate where id = :id")
                 .setParameter("id", user.getId())
+                .setParameter("name", user.getName())
+                .setParameter("email", user.getEmail())
+                .setParameter("password", user.getPassword())
+                .setParameter("birthdate", user.getBirthdate())
+
                 .executeUpdate();
     }
 }

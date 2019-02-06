@@ -1,9 +1,10 @@
 package micronaut.demo.modules.user.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 public class User {
@@ -21,8 +22,7 @@ public class User {
     @NotNull
     private String password;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date birthdate;
+    private String birthdate;
 
     public Long getId() {
         return id;
@@ -56,11 +56,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return this.birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 }

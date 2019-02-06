@@ -39,4 +39,10 @@ public class UserController {
         return HttpResponse.created(user);
     }
 
+    @Delete("/{id}")
+    void delete(Long id) {
+        userService.delete(id);
+    }
+
+
 }
